@@ -9,7 +9,7 @@ RESTORE=$(echo -en '\001\033[0m\002')
 intro_blurb() {
 echo ""
 echo "${YELLOW}"
-echo "============= new_kernel.sh ============="
+echo "============= new_kernel.sh For Gentoo Linux Users ============="
 echo ""
 echo "This program automates installing a specific kernel from gentoo-sources.  If you don't want to use a gentoo-sources kernel, then this script is not what you need."
 echo ""
@@ -74,6 +74,7 @@ check_complete "make modules_prepare"
 sudo make -j"${arg2}"
 check_complete "make (compilation)"
 
+notify-send -w "Please enter your password again to finish installing the kernel."
 sudo emerge @module-rebuild
 check_complete "module-rebuild"
 
