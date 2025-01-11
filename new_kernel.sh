@@ -126,5 +126,5 @@ arg2=$2
 intro_blurb
 check_args $1 $2
 install_the_kernel
-
+check_complete "${YELLOW}Installation of kernel ${arg1} ${RESTORE}"
 
