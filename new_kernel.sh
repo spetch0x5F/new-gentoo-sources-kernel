@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Run like:
+# sudo ./new_kernel.sh 6.13.2 4
+
 RED=$(echo -en '\001\033[00;31m\002')
 YELLOW=$(echo -en '\001\033[00;33m\002')
 RESTORE=$(echo -en '\001\033[0m\002')
@@ -13,7 +16,7 @@ echo "============= new_kernel.sh For Gentoo Linux Users ============="
 echo ""
 echo "This program automates installing a specific kernel from gentoo-sources.  If you don't want to use a gentoo-sources kernel, then this script is not what you need."
 echo ""
-echo "The program will do the following:"
+echo "The program does the following:"
 echo ""
 echo "========================================="
 echo ""
@@ -36,6 +39,7 @@ echo ""
 check_complete() {
     arg1=$1
     if [[ $? -eq 0 ]]; then
+    	echo ""
         echo "${YELLOW}$arg1 completed successfully.${RESTORE}"
         echo ""
     else
@@ -44,6 +48,7 @@ check_complete() {
         exit 1
     fi
 }
+
 
 install_the_kernel() {
 
@@ -74,7 +79,6 @@ check_complete "make modules_prepare"
 sudo make -j"${arg2}"
 check_complete "make (compilation)"
 
-notify-send -w "Please enter your password again to finish installing the kernel."
 sudo emerge @module-rebuild
 check_complete "module-rebuild"
 
@@ -121,10 +125,9 @@ fi
 arg2=$2
 
 }
-
-# RUN INSTALL
+ 
+###### MAIN ######
 intro_blurb
 check_args $1 $2
 install_the_kernel
 check_complete "${YELLOW}Installation of kernel ${arg1} ${RESTORE}"
-
